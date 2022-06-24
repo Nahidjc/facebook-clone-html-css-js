@@ -231,59 +231,22 @@
   border-radius: 10px;
 }
 
-.file {
+.btn-file {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
-
-.file > input[type="file"] {
-  display: none;
-}
-
-.file > label {
-  font-size: 1rem;
-  font-weight: 300;
-  cursor: pointer;
-  outline: 0;
-  user-select: none;
-  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-  border-style: solid;
-  border-radius: 4px;
-  border-width: 1px;
-  background-color: hsl(0, 0%, 100%);
-  color: hsl(0, 0%, 29%);
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.file > label:hover {
-  border-color: hsl(0, 0%, 21%);
-}
-
-.file > label:active {
-  background-color: hsl(0, 0%, 96%);
-}
-
-.file > label > i {
-  padding-right: 5px;
-}
-.file--success > label {
-  color: hsl(141, 71%, 48%);
-  border-color: hsl(141, 71%, 48%);
-}
-
-.file--success > label:hover {
-  border-color: hsl(141, 71%, 48%);
-  background-color: hsl(141, 71%, 96%);
-}
-
-.file--success > label:active {
-  background-color: hsl(141, 71%, 91%);
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
 }

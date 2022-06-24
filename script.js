@@ -76,10 +76,7 @@ console.log(single);
     </div>
   </div>
 
-  <!-- <div class="post__bottom">
-  <p>Hi there</p>
-</div> -->
-
+ 
 
 ${single.type ==="image"? ` <div class="post__image">
 <img
