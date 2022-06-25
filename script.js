@@ -1,25 +1,32 @@
 
+ document.getElementById("live-video").style.display = "none"
+var postArray = []
 
-
-
-var postArray= []
-
+document.getElementById('liveVideo').onclick=e=>{
+  document.getElementById("live-video").style.display = "block"
+  let video = document.getElementById("player");
+  navigator.mediaDevices.getUserMedia({video:true,audio:false})
+  .then(stream=>(video.srcObject=stream))
+  .catch(log)
+}
 
 
 
 document.getElementById('addPhotosInput').onchange = e => {
   const file = e.target.files[0];
   const url = URL.createObjectURL(file);
-
+  let id = "like" + Date.now()
+  console.log("id", id);
   let date = new Date().toDateString();
   postArray.unshift({
-  "url": url,
-  "date": date,
-  "type":"image"
+    "url": url,
+    "date": date,
+    "type": "image",
+    "likeID": id
 
   })
 
-displayPost(postArray)
+  displayPost(postArray)
 
 };
 
@@ -28,30 +35,30 @@ document.getElementById('addVideosInput').onchange = e => {
   const file = e.target.files[0];
   const url = URL.createObjectURL(file);
   let date = new Date().toDateString();
+  let id = "like" + Date.now()
+  console.log("id", id);
   postArray.unshift({
-  "url": url,
-  "date": date,
-  "type":"video"
+    "url": url,
+    "date": date,
+    "type": "video",
+    "likeID": id
 
   })
 
-displayPost(postArray)
-  // const li = ` <li> <video controls="controls" src=" ${url} " type="video/mp4" width="400px" height="200px"></video>
-  //      <span><i class="fa fa-trash"></i></span>
-  //  </li>`
-  // $('.video-list ul').append(li);
+  displayPost(postArray)
 };
 
 
 
 
-const displayPost = (postArray)=>{
+const displayPost = (postArray) => {
 
-var post = document.createElement('div');
-document.getElementById("post-list").innerHTML = ""
-post.innerHTML =  postArray.map(single=>{
-console.log(single);
-  return (`
+  var post = document.createElement('div');
+  document.getElementById("post-list").innerHTML = ""
+  post.innerHTML = postArray.map(single => {
+    console.log(single.likeID);
+    let id = single.likeID
+    return (`
   
   <div class="post">
   <div class="post__top">
@@ -78,20 +85,20 @@ console.log(single);
 
  
 
-${single.type ==="image"? ` <div class="post__image">
+${single.type === "image" ? ` <div class="post__image">
 <img
   src="${single.url}"
   alt=""
 />
-</div>`:`<video controls="controls" src=" ${single.url} " type="video/mp4" width="100%" ></video>`}
+</div>`: `<video controls="controls" src=" ${single.url} " type="video/mp4" width="100%" ></video>`}
  
 
   <div class="post__options">
     <div class="post__option">
-      <span class="material-icons">
+      <span class="material-icons"  onClick="getLike()">
         <i class="fa-solid fa-thumbs-up"></i>
       </span>
-      <p>Like</p>
+      <p id="${single.likeID}"></p>Like
     </div>
 
     <div class="post__option">
@@ -113,7 +120,18 @@ ${single.type ==="image"? ` <div class="post__image">
  `)
 
 
-})
-document.getElementById("post-list").appendChild(post)
+  })
+  document.getElementById("post-list").appendChild(post)
 }
 
+
+
+const getLike = (e) => {
+  console.log(e);
+  //   ++value;
+  //   document.getElementById('likeIncriment').innerHTML=value;
+  //  document.getElementById("likeText").style.color = "blue";
+
+
+
+}
